@@ -36,9 +36,10 @@ div v-if="!results.error && results.total > 0" id="content-wrapper"
             div.col-sm-5
               div v-if="result.ip_str"
                 h4
-                  | {{result.ip_str}}
-                  span.text-muted v-if="result.port"
-                    | :{{result.port}}
+                  a href="https://www.shodan.io/host/{{result.ip_str}}" target="_blank"
+                    | {{result.ip_str}}
+                    span.text-muted v-if="result.port"
+                      | :{{result.port}}
               div v-if="result.title"
                 h5
                   | {{result.title}}
@@ -66,6 +67,9 @@ div v-if="!results.error && results.total > 0" id="content-wrapper"
             div.col-sm-7
               pre.banner
                 | {{result.data}}
+              div v-if="result.opts.screenshot.data"
+                img src="data:image/jpeg;base64,{{result.opts.screenshot.data}}" width="500px"
+              
 div v-if="results.total === 0 && !results.error"
   center
     h3
